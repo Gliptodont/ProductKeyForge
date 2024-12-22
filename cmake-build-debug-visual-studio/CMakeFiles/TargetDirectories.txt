@@ -1,0 +1,6 @@
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/ProductKeyForge.dir
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/edit_cache.dir
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/rebuild_cache.dir
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/list_install_components.dir
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/install.dir
+D:/ProductKeyForge/cmake-build-debug-visual-studio/CMakeFiles/install/local.dir

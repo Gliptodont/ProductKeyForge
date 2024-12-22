@@ -1,0 +1,60 @@
+Checks: >
+  -*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  cppcoreguidelines-*,
+  bugprone-*,
+  clang-analyzer-*,
+  portability-*,
+  misc-*,
+  hicpp-*,
+  google-*,
+  modernize-use-auto,
+  modernize-use-override,
+  readability-braces-around-statements,
+  readability-function-cognitive-complexity,
+  readability-named-parameter,
+  readability-identifier-naming,
+  cppcoreguidelines-owning-memory,
+  cppcoreguidelines-special-member-functions,
+  bugprone-easily-swappable-parameters,
+  bugprone-unchecked-optional-access
+
+WarningsAsErrors: ''
+
+FormatStyle: file
+
+# Options corresponding to .clang-format
+Options:
+  Language: Cpp
+  Standard: c++17
+  ColumnLimit: 140
+  IndentWidth: 4
+  PointerAlignment: Left
+  UseTab: Never
+  BreakBeforeBraces: Custom
+  BraceWrapping:
+    AfterClass: true
+    AfterControlStatement: true
+    AfterEnum: true
+    AfterFunction: true
+    AfterNamespace: true
+    BeforeLambdaBody: true
+    AfterStruct: true
+    BeforeElse: true
+    SplitEmptyFunction: true
+
+CheckOptions:
+  - key: modernize-use-auto.MinTypeNameLength
+    value: 4
+  - key: readability-function-cognitive-complexity.Threshold
+    value: 10
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelCase
+  - key: readability-identifier-naming.VariableCase
+    value: camelCase
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_SNAKE_CASE
