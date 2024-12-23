@@ -1,9 +1,0 @@
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/lib/ProductKeyForge.lib
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/include/PKF.h
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/include/ProductKeyGenerator.h
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/include/RandomGenerator/IRandomGenerator.h
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/include/RandomGenerator/MTRandomGenerator.h
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/share/ProductKeyForge/cmake/ProductKeyForgeTargets.cmake
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/share/ProductKeyForge/cmake/ProductKeyForgeTargets-debug.cmake
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/share/ProductKeyForge/cmake/ProductKeyForgeConfig.cmake
-D:/ProductKeyForge/cmake-build-debug/_CPack_Packages/win64/TGZ/ProductKeyForge-0.0.1-Windows/share/ProductKeyForge/cmake/ProductKeyForgeConfigVersion.cmake
