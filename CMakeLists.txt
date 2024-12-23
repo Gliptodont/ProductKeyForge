@@ -26,12 +26,19 @@ include(CMakePackageConfigHelpers)
 
 # Set the headers files
 set(HEADER_FILES
+        include/PKF.h
+        include/ProductKeyGenerator.h
+
+        # Random Generator
         include/RandomGenerator/IRandomGenerator.h
         include/RandomGenerator/MTRandomGenerator.h
 )
 
 # Set the source files
 set(SOURCE_FILES
+        src/ProductKeyGenerator.cpp
+
+        # Random Generator
         src/RandomGenerator/MTRandomGenerator.cpp
 )
 
@@ -86,6 +93,16 @@ install(FILES
         "${CMAKE_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
         DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/cmake
 )
+
+# CPack configuration for simple archive packaging
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_DESCRIPTION}")
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}")
+set(CPACK_GENERATOR "ZIP;TGZ")
+
+# Include CPack to enable the configuration
+include(CPack)
 
 # Tests
 option(BUILD_PRODUCT_KEY_FORGE_TESTS "Build ProductKeyForge tests" OFF)

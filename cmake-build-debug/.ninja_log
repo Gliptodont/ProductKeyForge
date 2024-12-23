@@ -1,0 +1,4 @@
+# ninja log v6
+1	318	7566922975684875	CMakeFiles/ProductKeyForge.dir/src/ProductKeyGenerator.cpp.obj	928da0da2c697539
+8	462	7566922975764903	CMakeFiles/ProductKeyForge.dir/src/RandomGenerator/MTRandomGenerator.cpp.obj	1dc6511dede0a63a
+462	510	7566922980300843	ProductKeyForge.lib	2ceeb46169a6b0bc

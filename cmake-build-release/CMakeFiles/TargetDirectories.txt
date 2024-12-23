@@ -1,0 +1,8 @@
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/ProductKeyForge.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/package.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/package_source.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/edit_cache.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/rebuild_cache.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/list_install_components.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/install.dir
+D:/ProductKeyForge/cmake-build-release/CMakeFiles/install/local.dir

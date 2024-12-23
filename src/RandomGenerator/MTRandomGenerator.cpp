@@ -8,6 +8,13 @@ namespace PKF
 
     std::optional<char> MTRandomGenerator::getRandomCharacter(const std::string& characters)
     {
-        return std::nullopt;
+        if (characters.empty())
+        {
+            return std::nullopt;
+        }
+        else
+        {
+            return 'a';
+        }
     }
 } // namespace PKF

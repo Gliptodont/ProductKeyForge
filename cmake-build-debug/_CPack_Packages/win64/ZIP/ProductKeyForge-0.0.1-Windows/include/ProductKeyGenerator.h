@@ -1,0 +1,8 @@
+//
+// Created by magar on 24.12.2024.
+//
+
+#ifndef PRODUCTKEYGENERATOR_H
+#define PRODUCTKEYGENERATOR_H
+
+#endif //PRODUCTKEYGENERATOR_H
