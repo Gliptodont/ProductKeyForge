@@ -104,9 +104,8 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 # Include CPack to enable the configuration
 include(CPack)
 
-# Tests
-option(BUILD_PRODUCT_KEY_FORGE_TESTS "Build ProductKeyForge tests" OFF)
-if(BUILD_PRODUCT_KEY_FORGE_TESTS)
-    enable_testing()
-    add_subdirectory(test)
+# Example
+option(BUILD_PRODUCT_KEY_FORGE_EXAMPLE "Build ProductKeyForge Example" OFF)
+if(BUILD_PRODUCT_KEY_FORGE_EXAMPLE)
+    add_subdirectory(example)
 endif()
