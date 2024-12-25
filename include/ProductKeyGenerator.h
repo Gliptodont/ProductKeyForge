@@ -15,33 +15,19 @@ namespace PKF
     namespace Defaults
     {
         // Default values for KeyFormat configuration
-        static constexpr std::string DEFAULT_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        static constexpr size_t DEFAULT_SEGMENT_LENGTH = 5;
-        static constexpr size_t DEFAULT_SEGMENT_COUNT = 5;
-        static constexpr char DEFAULT_SEPARATOR = '-';
+        constexpr std::string_view DEFAULT_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        constexpr size_t DEFAULT_SEGMENT_LENGTH = 5;
+        constexpr size_t DEFAULT_SEGMENT_COUNT = 5;
+        constexpr char DEFAULT_SEPARATOR = '-';
     }
 
     struct KeyFormat
     {
-        std::string m_characters;
-        size_t m_segmentLength;
-        size_t m_segmentCount;
-        bool m_hasCheckSum;
-        char m_separator;
-
-        explicit KeyFormat(
-            const std::string& characters = Defaults::DEFAULT_CHARACTERS,
-            const size_t segmentLength = Defaults::DEFAULT_SEGMENT_LENGTH,
-            const size_t segmentCount = Defaults::DEFAULT_SEGMENT_COUNT,
-            const bool hasCheckSum = false,
-            const char separator = Defaults::DEFAULT_SEPARATOR)
-            : m_characters(characters),
-              m_segmentLength(segmentLength),
-              m_segmentCount(segmentCount),
-              m_hasCheckSum(hasCheckSum),
-              m_separator(separator)
-        {
-        }
+        std::string_view m_characters = Defaults::DEFAULT_CHARACTERS;
+        size_t m_segmentLength = Defaults::DEFAULT_SEGMENT_LENGTH;
+        size_t m_segmentCount = Defaults::DEFAULT_SEGMENT_COUNT;
+        bool m_hasCheckSum = false;
+        char m_separator = Defaults::DEFAULT_SEPARATOR;
     };
 
     class IRandomGenerator;
