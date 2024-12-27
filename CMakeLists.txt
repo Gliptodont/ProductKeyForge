@@ -27,6 +27,7 @@ include(CMakePackageConfigHelpers)
 # Set the headers files
 set(HEADER_FILES
         include/PKF.h
+        include/KeyFormat.h
         include/ProductKeyGenerator.h
 
         # Random Generator
@@ -36,6 +37,7 @@ set(HEADER_FILES
 
 # Set the source files
 set(SOURCE_FILES
+        src/KeyFormat.cpp
         src/ProductKeyGenerator.cpp
 
         # Random Generator

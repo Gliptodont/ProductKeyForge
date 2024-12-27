@@ -7,7 +7,6 @@ int main()
 
     std::cout << keyFormat->m_segmentLength << std::endl;
     std::cout << keyFormat->m_segmentCount << std::endl;
-    std::cout << keyFormat->m_hasCheckSum << std::endl;
     std::cout << keyFormat->m_separator << std::endl;
 
     std::shared_ptr<PKF::KeyFormat> keyF = nullptr;

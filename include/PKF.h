@@ -1,5 +1,6 @@
 #pragma once
 
+#include "KeyFormat.h"
 #include "ProductKeyGenerator.h"
 
 // Random Generator
