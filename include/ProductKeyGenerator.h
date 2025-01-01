@@ -20,6 +20,7 @@ namespace PKF
     class ProductKeyGenerator
     {
     public:
+        ProductKeyGenerator();
         explicit ProductKeyGenerator(const std::shared_ptr<KeyFormat>& keyFormat, const std::shared_ptr<IRandomGenerator>& randomGenerator)
             : m_keyFormat(keyFormat)
             , m_randomGenerator(randomGenerator)
@@ -41,7 +42,10 @@ namespace PKF
         [[nodiscard]] std::optional<std::string> generateKey() const;
         [[nodiscard]] std::optional<std::vector<std::string>> generateKeyBySegments() const;
 
+
+        [[nodiscard]] std::shared_ptr<KeyFormat> getKeyFormat() const;
         bool setKeyFormat(const std::shared_ptr<KeyFormat>& newKeyFormat);
+        [[nodiscard]] std::shared_ptr<IRandomGenerator> getRandomGenerator() const;
         bool setRandomGenerator(const std::shared_ptr<IRandomGenerator>& newRandomGenerator);
 
     private:
@@ -50,6 +54,6 @@ namespace PKF
 
         mutable std::mutex m_mutex;
 
-        std::string generateSegment(size_t length) const;
+        [[nodiscard]] std::optional<std::string> generateSegment(size_t length) const;
     };
 } // namespace PKF

@@ -36,7 +36,7 @@ namespace PKF
         [[nodiscard]] char getSeparator();
         bool setSeparator(char separator);
 
-        [[nodiscard]] inline bool validate() const;
+        [[nodiscard]] bool validate() const;
 
     private:
         std::string_view m_characters;
