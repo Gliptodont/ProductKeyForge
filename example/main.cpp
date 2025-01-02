@@ -5,8 +5,9 @@ int main()
 {
     // Create and configure a KeyFormat object
     auto keyFormat = std::make_shared<PKF::KeyFormat>();
-    keyFormat->setSegmentCount(6);
+    keyFormat->setSegmentCount(5);
     keyFormat->setSegmentLength(5);
+    keyFormat->setSeparator('-');
 
     // Create and initialize a random number generator
     auto randomGenerator = std::make_shared<PKF::MTRandomGenerator>();

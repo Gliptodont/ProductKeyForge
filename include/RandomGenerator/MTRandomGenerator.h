@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include <iostream>
 
 #include "IRandomGenerator.h"
 

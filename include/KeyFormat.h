@@ -20,7 +20,7 @@ namespace PKF
     {
     public:
         KeyFormat()
-            : m_characters(Defaults::DEFAULT_CHARACTERS)
+            : m_characters(std::string(Defaults::DEFAULT_CHARACTERS))
             , m_segmentLength(Defaults::DEFAULT_SEGMENT_LENGTH)
             , m_segmentCount(Defaults::DEFAULT_SEGMENT_COUNT)
             , m_separator(Defaults::DEFAULT_SEPARATOR)
@@ -39,7 +39,7 @@ namespace PKF
         [[nodiscard]] bool validate() const;
 
     private:
-        std::string_view m_characters;
+        std::string m_characters;
         size_t m_segmentLength;
         size_t m_segmentCount;
         char m_separator;

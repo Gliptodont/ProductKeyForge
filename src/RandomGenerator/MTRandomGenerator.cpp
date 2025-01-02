@@ -1,5 +1,6 @@
 #include "RandomGenerator/MTRandomGenerator.h"
 
+
 namespace PKF
 {
     void MTRandomGenerator::init()
@@ -11,10 +12,13 @@ namespace PKF
     {
         if (characters.empty())
         {
+            std::cerr << "Error: Characters string is empty!" << std::endl;
             return std::nullopt;
         }
 
         std::uniform_int_distribution<size_t> dist(0, characters.size() - 1);
-        return characters[dist(m_rng32)];
+        const size_t index = dist(m_rng32);
+
+        return characters[index];
     }
 } // namespace PKF
