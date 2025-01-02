@@ -27,13 +27,13 @@ namespace PKF
         {
             if (m_keyFormat == nullptr)
             {
-                std::cerr << "Error: KeyFormat is null, setting to default." << std::endl;
+                std::cerr << "Warning: KeyFormat is null, setting to default." << std::endl;
                 m_keyFormat = std::make_shared<KeyFormat>();
             }
 
             if (m_randomGenerator == nullptr)
             {
-                std::cerr << "Error: RandomGenerator is null, setting to default." << std::endl;
+                std::cerr << "Warning: RandomGenerator is null, setting to default." << std::endl;
                 m_randomGenerator = std::make_shared<MTRandomGenerator>();
                 m_randomGenerator->init();
             }

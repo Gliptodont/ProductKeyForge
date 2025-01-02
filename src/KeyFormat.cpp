@@ -16,10 +16,10 @@ namespace PKF
 
         if (characters.empty())
         {
-            std::cerr << "Error: Characters cannot be empty." << std::endl;
+            std::cerr << "Warning: Characters cannot be empty." << std::endl;
             return false;
         }
-        else if (!validateRange(characters.size(), static_cast<size_t>(2), static_cast<size_t>(256), "Error: Characters size must be between 2 and 256."))
+        else if (!validateRange(characters.size(), static_cast<size_t>(2), static_cast<size_t>(256), "Warning: Characters size must be between 2 and 256."))
         {
             return false;
         }
@@ -27,7 +27,7 @@ namespace PKF
         std::unordered_set<char> uniqueChars(characters.begin(), characters.end());
         if (uniqueChars.size() != characters.size())
         {
-            std::cerr << "Error: Characters must not contain duplicates." << std::endl;
+            std::cerr << "Warning: Characters must not contain duplicates." << std::endl;
             return false;
         }
 
@@ -46,7 +46,7 @@ namespace PKF
     {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        if (!validateRange(length, static_cast<size_t>(1), static_cast<size_t>(50), "Error: Segment length must be between 1 and 50."))
+        if (!validateRange(length, static_cast<size_t>(1), static_cast<size_t>(50), "Warning: Segment length must be between 1 and 50."))
         {
             return false;
         }
@@ -66,7 +66,7 @@ namespace PKF
     {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        if (!validateRange(count, static_cast<size_t>(1), static_cast<size_t>(20), "Error: Segment count must be between 1 and 20."))
+        if (!validateRange(count, static_cast<size_t>(1), static_cast<size_t>(20), "Warning: Segment count must be between 1 and 20."))
         {
             return false;
         }
@@ -88,13 +88,13 @@ namespace PKF
 
         if (separator == '\0')
         {
-            std::cerr << "Error: Separator cannot be null." << std::endl;
+            std::cerr << "Warning: Separator cannot be null." << std::endl;
             return false;
         }
 
         if (m_characters.find(separator) != std::string_view::npos)
         {
-            std::cerr << "Error: Separator must not be a part of the character set." << std::endl;
+            std::cerr << "Warning: Separator must not be a part of the character set." << std::endl;
             return false;
         }
 
@@ -110,7 +110,7 @@ namespace PKF
 
         if (totalKeyLength > 1024)
         {
-            std::cerr << "Error: Combined key length too large." << std::endl;
+            std::cerr << "Warning: Combined key length too large." << std::endl;
             return false;
         }
 

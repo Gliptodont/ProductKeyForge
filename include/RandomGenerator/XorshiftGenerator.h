@@ -1,6 +1,6 @@
 #pragma once
 
-#include <random>
+#include <ctime>
 #include <iostream>
 
 #include "IRandomGenerator.h"
@@ -8,13 +8,14 @@
 namespace PKF
 {
     //TODO: Реализовать безопастность в потоках
-    class MTRandomGenerator final : public IRandomGenerator
+    class XorshiftGenerator final : public IRandomGenerator
     {
     public:
         void init() override;
+        void initWithSeed(uint32_t seed);
         std::optional<char> getRandomCharacter(const std::string& characters) override;
 
     private:
-        std::mt19937 m_rng32;
+        uint32_t m_state = 1;
     };
-} // namespace PKF
+}

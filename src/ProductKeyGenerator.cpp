@@ -114,7 +114,7 @@ namespace PKF
 
         if (newKeyFormat == nullptr)
         {
-            std::cerr << "Error: Failed to set KeyFormat because it is null." << std::endl;
+            std::cerr << "Warning: Failed to set KeyFormat because it is null." << std::endl;
             return false;
         }
 
@@ -135,7 +135,7 @@ namespace PKF
 
         if (newRandomGenerator == nullptr)
         {
-            std::cerr << "Error: Failed to set RandomGenerator because it is null." << std::endl;
+            std::cerr << "Warning: Failed to set RandomGenerator because it is null." << std::endl;
             return false;
         }
 

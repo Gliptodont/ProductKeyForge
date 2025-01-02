@@ -10,23 +10,26 @@ int main()
     keyFormat->setSeparator('-');
 
     // Create and initialize a random number generator
-    auto randomGenerator = std::make_shared<PKF::MTRandomGenerator>();
+    auto randomGenerator = std::make_shared<PKF::XorshiftGenerator>();
     randomGenerator->init();
 
     // Create a ProductKeyGenerator object with the specified key format and random generator
     PKF::ProductKeyGenerator productKeyGenerator = PKF::ProductKeyGenerator(keyFormat, randomGenerator);
 
-    // Generate a product key
-    auto key = productKeyGenerator.generateKey();
+    for (int i = 0; i < 10; i++)
+    {
+        // Generate a product key
+        auto key = productKeyGenerator.generateKey();
 
-    // Check if the key was generated successfully and output the result
-    if (key.has_value())
-    {
-        std::cout << "Generated key: " << key.value() << std::endl;
-    }
-    else
-    {
-        std::cerr << "Failed to generate key." << std::endl;
+        // Check if the key was generated successfully and output the result
+        if (key.has_value())
+        {
+            std::cout << "Generated key: " << key.value() << std::endl;
+        }
+        else
+        {
+            std::cerr << "Failed to generate key." << std::endl;
+        }
     }
 
     std::cout << "------------------------------------------" << std::endl;

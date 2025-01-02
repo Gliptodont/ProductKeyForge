@@ -33,6 +33,8 @@ set(HEADER_FILES
         # Random Generator
         include/RandomGenerator/IRandomGenerator.h
         include/RandomGenerator/MTRandomGenerator.h
+        include/RandomGenerator/LinearCongruentialGenerator.h
+        include/RandomGenerator/XorshiftGenerator.h
 )
 
 # Set the source files
@@ -42,6 +44,8 @@ set(SOURCE_FILES
 
         # Random Generator
         src/RandomGenerator/MTRandomGenerator.cpp
+        src/RandomGenerator/LinearCongruentialGenerator.cpp
+        src/RandomGenerator/XorshiftGenerator.cpp
 )
 
 # Add the library
