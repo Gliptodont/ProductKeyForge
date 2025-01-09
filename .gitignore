@@ -1,0 +1,119 @@
+# General
+*.log
+*.tmp
+*.cache
+*.bak
+*.swp
+*.swo
+*.swn
+*.old
+
+# Compiled object files, static and dynamic libraries
+*.o
+*.obj
+*.lo
+*.la
+*.al
+*.libs
+*.dll
+*.so
+*.so.*
+*.dylib
+*.a
+*.lib
+*.exe
+*.out
+*.app
+*.dSYM/
+*.pdb
+*.exp
+*.ilk
+
+# CLion/JetBrains IDE
+.idea/
+cmake-build-*/
+cmake-build-debug/
+cmake-build-release/
+cmake-build-debug-visual-studio/
+cmake-build-release-visual-studio/
+CMakeLists.txt.user
+
+# Visual Studio
+.vscode/
+.vs/
+*.vcxproj*
+*.csproj*
+*.sln
+*.suo
+*.user
+*.filters
+*.aps
+*.ncb
+*.log
+*.sdf
+*.sqlite
+*.ipch
+*.opensdf
+*.tlog/
+*.vc.db
+
+# Visual Studio Code
+.vscode/
+launch.json
+tasks.json
+settings.json
+
+# Xcode
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+DerivedData/
+*.mode1v3
+*.pbxuser
+*.perspectivev3
+*.xccheckout
+*.moved-aside
+*.DS_Store
+*.hmap
+*.lock
+*.log
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+install_manifest.txt
+build/
+_build/
+Debug/
+Release/
+
+# GNU Make
+*.d
+*.gcda
+*.gcno
+*.gcov
+makefile~ 
+Makefile~
+
+# System Files (general)
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# clangd
+.clangd/
+.cache/
+compile_commands.json
+
+# Miscellaneous
+*.plist
+*.ipr
+*.iws
+*.iml
+*.pyc
+__pycache__/
+.env
