@@ -5,6 +5,8 @@
 
 #include "IRandomGenerator.h"
 
+#include <cstdint>
+
 namespace PKF
 {
     //TODO: Реализовать безопастность в потоках

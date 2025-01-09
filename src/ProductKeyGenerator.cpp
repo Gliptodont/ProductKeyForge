@@ -25,7 +25,7 @@ namespace PKF
         size_t segmentLength = m_keyFormat->getSegmentLength();
         char separator = m_keyFormat->getSeparator();
 
-        for (int i = 0; i < segmentCount; ++i)
+        for (size_t i = 0; i < segmentCount; ++i)
         {
             auto segment = generateSegment(segmentLength);
 
@@ -61,7 +61,7 @@ namespace PKF
         size_t segmentCount = m_keyFormat->getSegmentCount();
         size_t segmentLength = m_keyFormat->getSegmentLength();
 
-        for (int i = 0; i < segmentCount; ++i)
+        for (size_t i = 0; i < segmentCount; ++i)
         {
             auto segment = generateSegment(segmentLength);
 
