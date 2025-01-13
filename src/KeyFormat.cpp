@@ -102,6 +102,20 @@ namespace PKF
         return true;
     }
 
+    bool KeyFormat::getHasChecksum()
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        return m_hasChecksum;
+    }
+
+    void KeyFormat::setHasChecksum(bool isChecksum)
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        m_hasChecksum = isChecksum;
+    }
+
     bool KeyFormat::validate() const
     {
         std::lock_guard<std::mutex> lock(m_mutex);

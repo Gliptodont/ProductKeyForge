@@ -44,35 +44,18 @@ namespace PKF
             }
         }
 
-        return key;
-    }
-
-    std::optional<std::vector<std::string>>  ProductKeyGenerator::generateKeyBySegments() const
-    {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        if (m_keyFormat->validate() == false)
+        if (m_keyFormat->getHasChecksum())
         {
-            return std::nullopt;
-        }
-
-        std::vector<std::string> key;
-
-        size_t segmentCount = m_keyFormat->getSegmentCount();
-        size_t segmentLength = m_keyFormat->getSegmentLength();
-
-        for (size_t i = 0; i < segmentCount; ++i)
-        {
-            auto segment = generateSegment(segmentLength);
-
-            if (segment.has_value())
+            if (m_checksumAlgorithm == nullptr)
             {
-                key.push_back(segment.value());
+                std::cerr << "Warning: RandomGenerator is null, setting to default." << std::endl;
+                m_checksumAlgorithm = std::make_shared<BaseChecksumAlgorithm>();
             }
-            else
-            {
-                return std::nullopt;
-            }
+
+            int checksum = m_checksumAlgorithm->calculate(key, m_keyFormat->getSeparator());
+
+            key.push_back(m_keyFormat->getSeparator());
+            key.append(std::to_string(checksum));
         }
 
         return key;
@@ -99,6 +82,20 @@ namespace PKF
         }
 
         return segment;
+    }
+
+    std::vector<std::string> ProductKeyGenerator::getKeyBySegments(std::string_view key) const
+    {
+        std::vector<std::string> segments;
+
+        auto view = key | std::views::split(m_keyFormat->getSeparator());
+
+        for (auto&& part : view)
+        {
+            segments.emplace_back(part.begin(), static_cast<size_t>(std::distance(part.begin(), part.end())));
+        }
+
+        return segments;
     }
 
     std::shared_ptr<KeyFormat> ProductKeyGenerator::getKeyFormat() const
@@ -140,6 +137,27 @@ namespace PKF
         }
 
         m_randomGenerator = newRandomGenerator;
+        return true;
+    }
+
+    std::shared_ptr<IChecksumAlgorithm> ProductKeyGenerator::getChecksumAlgorithm() const
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        return m_checksumAlgorithm;
+    }
+
+    bool ProductKeyGenerator::setChecksumAlgorithm(const std::shared_ptr<IChecksumAlgorithm>& newChecksumAlgorithm)
+    {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
+        if (newChecksumAlgorithm == nullptr)
+        {
+            std::cerr << "Warning: Failed to set ChecksumAlgorithm because it is null." << std::endl;
+            return false;
+        }
+
+        m_checksumAlgorithm = newChecksumAlgorithm;
         return true;
     }
 } // namespace PKF

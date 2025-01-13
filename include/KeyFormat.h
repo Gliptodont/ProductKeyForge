@@ -24,6 +24,7 @@ namespace PKF
             , m_segmentLength(Defaults::DEFAULT_SEGMENT_LENGTH)
             , m_segmentCount(Defaults::DEFAULT_SEGMENT_COUNT)
             , m_separator(Defaults::DEFAULT_SEPARATOR)
+            , m_hasChecksum(false)
         {
         }
 
@@ -35,6 +36,8 @@ namespace PKF
         bool setSegmentCount(size_t count);
         [[nodiscard]] char getSeparator();
         bool setSeparator(char separator);
+        [[nodiscard]] bool getHasChecksum();
+        void setHasChecksum(bool isChecksum);
 
         [[nodiscard]] bool validate() const;
 
@@ -43,6 +46,7 @@ namespace PKF
         size_t m_segmentLength;
         size_t m_segmentCount;
         char m_separator;
+        bool m_hasChecksum;
 
         mutable std::mutex m_mutex;
 

@@ -35,6 +35,10 @@ set(HEADER_FILES
         include/RandomGenerator/MTRandomGenerator.h
         include/RandomGenerator/LinearCongruentialGenerator.h
         include/RandomGenerator/XorshiftGenerator.h
+
+        # Checksum Algorithm
+        include/Checksum/IChecksumAlgorithm.h
+        include/Checksum/BaseChecksumAlgorithm.h
 )
 
 # Set the source files
@@ -46,6 +50,9 @@ set(SOURCE_FILES
         src/RandomGenerator/MTRandomGenerator.cpp
         src/RandomGenerator/LinearCongruentialGenerator.cpp
         src/RandomGenerator/XorshiftGenerator.cpp
+
+        # Checksum Algorithm
+        src/Checksum/BaseChecksumAlgorithm.cpp
 )
 
 # Add the library
