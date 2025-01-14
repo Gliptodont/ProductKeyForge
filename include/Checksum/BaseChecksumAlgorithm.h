@@ -4,7 +4,6 @@
 
 namespace PKF
 {
-    //TODO: Реализовать безопастность в потоках
     class BaseChecksumAlgorithm final : public IChecksumAlgorithm
     {
     public:

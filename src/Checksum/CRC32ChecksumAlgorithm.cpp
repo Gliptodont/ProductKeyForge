@@ -28,7 +28,18 @@ namespace PKF
         return table;
     }
 
-    std::array<uint32_t, 256> CRC32ChecksumAlgorithm::m_crcTable = CRC32ChecksumAlgorithm::generateCRCTable();
+    const std::array<uint32_t, 256>& CRC32ChecksumAlgorithm::getCRCTable()
+    {
+        static std::once_flag flag;
+        static std::array<uint32_t, 256> table;
+
+        std::call_once(flag, []()
+        {
+            table = generateCRCTable();
+        });
+
+        return table;
+    }
 
     int CRC32ChecksumAlgorithm::calculate(const std::string& key, char separator) const
     {
@@ -38,7 +49,7 @@ namespace PKF
         {
             if (ch != separator)
             {
-                crc = (crc >> 8) ^ m_crcTable[(crc ^ static_cast<unsigned char>(ch)) & 0xFF];
+                crc = (crc >> 8) ^ getCRCTable()[(crc ^ static_cast<unsigned char>(ch)) & 0xFF];
             }
         }
 

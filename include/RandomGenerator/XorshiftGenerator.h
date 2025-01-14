@@ -2,6 +2,7 @@
 
 #include <ctime>
 #include <iostream>
+#include <mutex>
 
 #include "IRandomGenerator.h"
 
@@ -9,7 +10,6 @@
 
 namespace PKF
 {
-    //TODO: Реализовать безопастность в потоках
     class XorshiftGenerator final : public IRandomGenerator
     {
     public:
@@ -18,6 +18,7 @@ namespace PKF
         std::optional<char> getRandomCharacter(const std::string& characters) override;
 
     private:
+        std::mutex m_mutex;
         uint32_t m_state = 1;
     };
 }

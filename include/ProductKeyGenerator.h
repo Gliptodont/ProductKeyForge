@@ -22,6 +22,7 @@ namespace PKF
     class KeyFormat;
     class IRandomGenerator;
 
+    //TODO: ПРОВЕРЬ БЕЗОПАСТНОСТЬ В МНОГОПОТОЧНОЙ СРЕДЕ
     class ProductKeyGenerator
     {
     public:

@@ -35,92 +35,78 @@ namespace PKF
         return true;
     }
 
-    size_t KeyFormat::getSegmentLength()
+    size_t KeyFormat::getSegmentLength() const
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        return m_segmentLength;
+        return m_segmentLength.load();
     }
 
     bool KeyFormat::setSegmentLength(size_t length)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
         if (!validateRange(length, static_cast<size_t>(1), static_cast<size_t>(50), "Warning: Segment length must be between 1 and 50."))
         {
             return false;
         }
 
-        m_segmentLength = length;
+        m_segmentLength.store(length);
         return true;
     }
 
-    size_t KeyFormat::getSegmentCount()
+    size_t KeyFormat::getSegmentCount() const
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        return m_segmentCount;
+        return m_segmentCount.load();
     }
 
     bool KeyFormat::setSegmentCount(size_t count)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
         if (!validateRange(count, static_cast<size_t>(1), static_cast<size_t>(20), "Warning: Segment count must be between 1 and 20."))
         {
             return false;
         }
 
-        m_segmentCount = count;
+        m_segmentCount.store(count);
         return true;
     }
 
-    char KeyFormat::getSeparator()
+    char KeyFormat::getSeparator() const
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        return m_separator;
+        return m_separator.load();
     }
 
     bool KeyFormat::setSeparator(char separator)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
         if (separator == '\0')
         {
             std::cerr << "Warning: Separator cannot be null." << std::endl;
             return false;
         }
 
-        if (m_characters.find(separator) != std::string_view::npos)
         {
-            std::cerr << "Warning: Separator must not be a part of the character set." << std::endl;
-            return false;
+            std::lock_guard<std::mutex> lock(m_mutex);
+
+            if (m_characters.find(separator) != std::string_view::npos)
+            {
+                std::cerr << "Warning: Separator must not be a part of the character set." << std::endl;
+                return false;
+            }
         }
 
-        m_separator = separator;
+        m_separator.store(separator);
         return true;
     }
 
-    bool KeyFormat::getHasChecksum()
+    bool KeyFormat::getHasChecksum() const
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        return m_hasChecksum;
+        return m_hasChecksum.load();
     }
 
     void KeyFormat::setHasChecksum(bool isChecksum)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        m_hasChecksum = isChecksum;
+        m_hasChecksum.store(isChecksum);
     }
 
     bool KeyFormat::validate() const
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
-        size_t totalKeyLength = m_segmentLength * m_segmentCount + (m_segmentCount - 1);
+        size_t totalKeyLength = getSegmentLength() * getSegmentCount() + (getSegmentCount() - 1);
 
         if (totalKeyLength > 1024)
         {

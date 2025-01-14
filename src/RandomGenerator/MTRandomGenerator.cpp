@@ -5,11 +5,15 @@ namespace PKF
 {
     void MTRandomGenerator::init()
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_rng32.seed(std::random_device{}());
     }
 
     std::optional<char> MTRandomGenerator::getRandomCharacter(const std::string& characters)
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         if (characters.empty())
         {
             std::cerr << "Error: Characters string is empty!" << std::endl;

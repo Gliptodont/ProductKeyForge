@@ -2,12 +2,12 @@
 
 #include <ctime>
 #include <iostream>
+#include <mutex>
 
 #include "IRandomGenerator.h"
 
 namespace PKF
 {
-    //TODO: Реализовать безопастность в потоках
     class LinearCongruentialGenerator final : public IRandomGenerator
     {
     public:
@@ -16,6 +16,7 @@ namespace PKF
         std::optional<char> getRandomCharacter(const std::string& characters) override;
 
     private:
+        std::mutex m_mutex;
         unsigned int m_seed = 1;
         unsigned int m_current = 1;
         const unsigned int multiplier = 1664525;

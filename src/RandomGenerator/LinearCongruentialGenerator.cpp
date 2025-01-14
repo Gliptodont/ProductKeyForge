@@ -4,12 +4,16 @@ namespace PKF
 {
     void LinearCongruentialGenerator::init()
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_seed = static_cast<unsigned int>(std::time(nullptr));
         m_current = m_seed;
     }
 
     void LinearCongruentialGenerator::initWithSeed(unsigned int seed)
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         if (seed == 0)
         {
             std::cerr << "Warning: Seed value is 0. Defaulting to current time." << std::endl;
@@ -24,6 +28,8 @@ namespace PKF
 
     std::optional<char> LinearCongruentialGenerator::getRandomCharacter(const std::string& characters)
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         if (characters.empty())
         {
             std::cerr << "Error: Characters string is empty!" << std::endl;

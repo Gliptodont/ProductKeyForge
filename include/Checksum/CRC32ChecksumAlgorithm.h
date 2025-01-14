@@ -14,7 +14,7 @@ namespace PKF
 
     private:
         static std::array<uint32_t, 256> generateCRCTable();
-        static std::array<uint32_t, 256> m_crcTable;
+        static const std::array<uint32_t, 256>& getCRCTable();
     };
 
 } // namespace PKF
