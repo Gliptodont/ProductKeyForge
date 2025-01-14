@@ -12,3 +12,4 @@
 // Checksum Algorithm
 #include "Checksum/IChecksumAlgorithm.h"
 #include "Checksum/BaseChecksumAlgorithm.h"
+#include "Checksum/CRC32ChecksumAlgorithm.h"

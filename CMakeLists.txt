@@ -39,6 +39,7 @@ set(HEADER_FILES
         # Checksum Algorithm
         include/Checksum/IChecksumAlgorithm.h
         include/Checksum/BaseChecksumAlgorithm.h
+        include/Checksum/CRC32ChecksumAlgorithm.h
 )
 
 # Set the source files
@@ -53,6 +54,7 @@ set(SOURCE_FILES
 
         # Checksum Algorithm
         src/Checksum/BaseChecksumAlgorithm.cpp
+        src/Checksum/CRC32ChecksumAlgorithm.cpp
 )
 
 # Add the library

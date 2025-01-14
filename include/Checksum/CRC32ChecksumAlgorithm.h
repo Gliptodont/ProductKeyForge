@@ -1,14 +1,20 @@
 #pragma once
 
+#include <array>
+
 #include "IChecksumAlgorithm.h"
 
 namespace PKF
 {
-    //TODO: Реализовать безопастность в потоках
-    class BaseChecksumAlgorithm final : public IChecksumAlgorithm
+    class CRC32ChecksumAlgorithm final : public IChecksumAlgorithm
     {
     public:
         [[nodiscard]] int calculate(const std::string& key, char separator) const override;
         [[nodiscard]] bool validate(const std::string& key, char separator) const override;
+
+    private:
+        static std::array<uint32_t, 256> generateCRCTable();
+        static std::array<uint32_t, 256> m_crcTable;
     };
+
 } // namespace PKF

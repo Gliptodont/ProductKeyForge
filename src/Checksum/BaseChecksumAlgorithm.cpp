@@ -2,7 +2,7 @@
 
 namespace PKF
 {
-    int BaseChecksumAlgorithm::calculate(const std::string& key, const char& separator) const
+    int BaseChecksumAlgorithm::calculate(const std::string& key, char separator) const
     {
         int sum = 0;
 
@@ -17,7 +17,7 @@ namespace PKF
         return sum % 10;
     }
 
-    bool BaseChecksumAlgorithm::validate(const std::string& key, const char& separator) const
+    bool BaseChecksumAlgorithm::validate(const std::string& key, char separator) const
     {
         size_t lastDash = key.rfind(separator);
 
