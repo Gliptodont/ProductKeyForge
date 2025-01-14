@@ -92,8 +92,9 @@ namespace PKF
 
         for (auto&& part : view)
         {
-            segments.emplace_back(part.begin(), static_cast<size_t>(std::distance(part.begin(), part.end())));
+            segments.emplace_back(std::string_view{part.begin(), part.end()});
         }
+
 
         return segments;
     }
