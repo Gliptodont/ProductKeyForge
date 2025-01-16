@@ -4,6 +4,8 @@ namespace PKF
 {
     void XorshiftGenerator::init()
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_state = static_cast<uint32_t>(std::time(nullptr));
     }
 
@@ -17,11 +19,15 @@ namespace PKF
             return;
         }
 
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         m_state = seed;
     }
 
     std::optional<char> XorshiftGenerator::getRandomCharacter(const std::string& characters)
     {
+        std::lock_guard<std::mutex> lock(m_mutex);
+
         if (characters.empty())
         {
             std::cerr << "Error: Characters string is empty!" << std::endl;

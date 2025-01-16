@@ -4,6 +4,7 @@
 #include <mutex>
 #include <string>
 #include <unordered_set>
+#include <atomic>
 
 namespace PKF
 {
@@ -24,25 +25,27 @@ namespace PKF
             , m_segmentLength(Defaults::DEFAULT_SEGMENT_LENGTH)
             , m_segmentCount(Defaults::DEFAULT_SEGMENT_COUNT)
             , m_separator(Defaults::DEFAULT_SEPARATOR)
+            , m_hasChecksum(false)
         {
         }
 
         [[nodiscard]] std::string getCharacters();
         bool setCharacters(const std::string& characters);
-        [[nodiscard]] size_t getSegmentLength();
+        [[nodiscard]] size_t getSegmentLength() const;
         bool setSegmentLength(size_t length);
-        [[nodiscard]] size_t getSegmentCount();
+        [[nodiscard]] size_t getSegmentCount() const;
         bool setSegmentCount(size_t count);
-        [[nodiscard]] char getSeparator();
+        [[nodiscard]] char getSeparator() const;
         bool setSeparator(char separator);
-
-        [[nodiscard]] bool validate() const;
+        [[nodiscard]] bool getHasChecksum() const;
+        void setHasChecksum(bool isChecksum);
 
     private:
         std::string m_characters;
-        size_t m_segmentLength;
-        size_t m_segmentCount;
-        char m_separator;
+        std::atomic<size_t> m_segmentLength;
+        std::atomic<size_t> m_segmentCount;
+        std::atomic<char> m_separator;
+        std::atomic<bool> m_hasChecksum;
 
         mutable std::mutex m_mutex;
 
