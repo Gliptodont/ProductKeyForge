@@ -103,17 +103,4 @@ namespace PKF
     {
         m_hasChecksum.store(isChecksum);
     }
-
-    bool KeyFormat::validate() const
-    {
-        size_t totalKeyLength = getSegmentLength() * getSegmentCount() + (getSegmentCount() - 1);
-
-        if (totalKeyLength > 1024)
-        {
-            std::cerr << "Warning: Combined key length too large." << std::endl;
-            return false;
-        }
-
-        return true;
-    }
 } // namespace PKF

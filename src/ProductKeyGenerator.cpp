@@ -4,10 +4,12 @@ namespace PKF
 {
     ProductKeyGenerator::ProductKeyGenerator()
     {
-        m_keyFormat = std::make_shared<KeyFormat>();
+        m_keyFormat.store(std::make_shared<KeyFormat>());
 
-        m_randomGenerator = std::make_shared<MTRandomGenerator>();
+        m_randomGenerator.store(std::make_shared<MTRandomGenerator>());
         m_randomGenerator.load()->init();
+
+        m_checksumAlgorithm.store(nullptr);
     }
 
     std::optional<std::string> ProductKeyGenerator::generateKey() const
@@ -15,11 +17,6 @@ namespace PKF
         std::lock_guard<std::mutex> lock(m_mutex);
 
         const auto keyFormat = m_keyFormat.load();
-
-        if (keyFormat->validate() == false)
-        {
-            return std::nullopt;
-        }
 
         std::string key;
 

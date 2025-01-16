@@ -11,8 +11,6 @@ namespace PKF
 
     void XorshiftGenerator::initWithSeed(uint32_t seed)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
         if (seed == 0)
         {
             std::cerr << "Warning: Seed value is 0. Defaulting to current time." << std::endl;
@@ -20,6 +18,8 @@ namespace PKF
 
             return;
         }
+
+        std::lock_guard<std::mutex> lock(m_mutex);
 
         m_state = seed;
     }

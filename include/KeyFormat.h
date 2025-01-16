@@ -40,8 +40,6 @@ namespace PKF
         [[nodiscard]] bool getHasChecksum() const;
         void setHasChecksum(bool isChecksum);
 
-        [[nodiscard]] bool validate() const;
-
     private:
         std::string m_characters;
         std::atomic<size_t> m_segmentLength;

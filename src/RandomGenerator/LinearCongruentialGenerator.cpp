@@ -12,8 +12,6 @@ namespace PKF
 
     void LinearCongruentialGenerator::initWithSeed(unsigned int seed)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
-
         if (seed == 0)
         {
             std::cerr << "Warning: Seed value is 0. Defaulting to current time." << std::endl;
@@ -21,6 +19,8 @@ namespace PKF
 
             return;
         }
+
+        std::lock_guard<std::mutex> lock(m_mutex);
 
         m_seed = seed;
         m_current = m_seed;

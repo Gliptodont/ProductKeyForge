@@ -119,6 +119,7 @@ set(CPACK_GENERATOR "ZIP;TGZ")
 # Include CPack to enable the configuration
 include(CPack)
 
+# Test -DTEST_PRODUCT_KEY_FORGE=ON
 option(TEST_PRODUCT_KEY_FORGE "Test ProductKeyForge" OFF)
 if(TEST_PRODUCT_KEY_FORGE)
     add_subdirectory(test)

@@ -30,7 +30,8 @@ namespace PKF
 
         explicit ProductKeyGenerator(const std::shared_ptr<KeyFormat>& keyFormat, const std::shared_ptr<IRandomGenerator>& randomGenerator)
             : m_keyFormat(keyFormat)
-              , m_randomGenerator(randomGenerator)
+            , m_randomGenerator(randomGenerator)
+            , m_checksumAlgorithm(nullptr)
         {
             if (m_keyFormat.load() == nullptr)
             {
