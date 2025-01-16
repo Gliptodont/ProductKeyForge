@@ -33,17 +33,17 @@ namespace PKF
             , m_randomGenerator(randomGenerator)
             , m_checksumAlgorithm(nullptr)
         {
-            if (m_keyFormat.load() == nullptr)
+            if (m_keyFormat == nullptr)
             {
                 std::cerr << "Warning: KeyFormat is null, setting to default." << std::endl;
-                m_keyFormat.store(std::make_shared<KeyFormat>());
+                m_keyFormat = std::make_shared<KeyFormat>();
             }
 
-            if (m_randomGenerator.load() == nullptr)
+            if (m_randomGenerator == nullptr)
             {
                 std::cerr << "Warning: RandomGenerator is null, setting to default." << std::endl;
-                m_randomGenerator.store(std::make_shared<MTRandomGenerator>());
-                m_randomGenerator.load()->init();
+                m_randomGenerator = std::make_shared<MTRandomGenerator>();
+                m_randomGenerator->init();
             }
         }
 
@@ -60,9 +60,9 @@ namespace PKF
 
     private:
         mutable std::mutex m_mutex;
-        std::atomic<std::shared_ptr<KeyFormat>> m_keyFormat;
-        std::atomic<std::shared_ptr<IRandomGenerator>> m_randomGenerator;
-        mutable std::atomic<std::shared_ptr<IChecksumAlgorithm>> m_checksumAlgorithm;
+        std::shared_ptr<KeyFormat> m_keyFormat;
+        std::shared_ptr<IRandomGenerator> m_randomGenerator;
+        mutable std::shared_ptr<IChecksumAlgorithm> m_checksumAlgorithm;
 
         [[nodiscard]] std::optional<std::string> generateSegment(size_t length) const;
     };
