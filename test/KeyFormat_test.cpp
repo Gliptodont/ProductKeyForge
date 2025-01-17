@@ -4,7 +4,8 @@
 
 namespace PKF
 {
-    TEST(KeyFormatTest, DefaultConstructor) {
+    TEST(KeyFormatTest, DefaultConstructor)
+    {
         KeyFormat keyFormat;
         EXPECT_EQ(keyFormat.getCharacters(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
         EXPECT_EQ(keyFormat.getSegmentLength(), 5);
@@ -13,7 +14,8 @@ namespace PKF
         EXPECT_FALSE(keyFormat.getHasChecksum());
     }
 
-    TEST(KeyFormatTest, SetCharacters) {
+    TEST(KeyFormatTest, SetCharacters)
+    {
         KeyFormat keyFormat;
         EXPECT_TRUE(keyFormat.setCharacters("ABCD1234"));
         EXPECT_EQ(keyFormat.getCharacters(), "ABCD1234");
@@ -23,7 +25,8 @@ namespace PKF
         EXPECT_FALSE(keyFormat.setCharacters("AABCD1234"));
     }
 
-    TEST(KeyFormatTest, SetSegmentLength) {
+    TEST(KeyFormatTest, SetSegmentLength)
+    {
         KeyFormat keyFormat;
         EXPECT_TRUE(keyFormat.setSegmentLength(10));
         EXPECT_EQ(keyFormat.getSegmentLength(), 10);
@@ -32,7 +35,8 @@ namespace PKF
         EXPECT_FALSE(keyFormat.setSegmentLength(51));
     }
 
-    TEST(KeyFormatTest, SetSegmentCount) {
+    TEST(KeyFormatTest, SetSegmentCount)
+    {
         KeyFormat keyFormat;
         EXPECT_TRUE(keyFormat.setSegmentCount(10));
         EXPECT_EQ(keyFormat.getSegmentCount(), 10);
@@ -41,7 +45,8 @@ namespace PKF
         EXPECT_FALSE(keyFormat.setSegmentCount(21));
     }
 
-    TEST(KeyFormatTest, SetSeparator) {
+    TEST(KeyFormatTest, SetSeparator)
+    {
         KeyFormat keyFormat;
         EXPECT_TRUE(keyFormat.setSeparator('_'));
         EXPECT_EQ(keyFormat.getSeparator(), '_');
@@ -50,7 +55,8 @@ namespace PKF
         EXPECT_FALSE(keyFormat.setSeparator('A'));
     }
 
-    TEST(KeyFormatTest, SetHasChecksum) {
+    TEST(KeyFormatTest, SetHasChecksum)
+    {
         KeyFormat keyFormat;
         keyFormat.setHasChecksum(true);
         EXPECT_TRUE(keyFormat.getHasChecksum());
@@ -58,4 +64,4 @@ namespace PKF
         keyFormat.setHasChecksum(false);
         EXPECT_FALSE(keyFormat.getHasChecksum());
     }
-}
+} // namespace PKF

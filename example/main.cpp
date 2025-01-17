@@ -20,21 +20,21 @@ int main()
     PKF::ProductKeyGenerator productKeyGenerator = PKF::ProductKeyGenerator(keyFormat, randomGenerator);
     productKeyGenerator.setChecksumAlgorithm(checksumAlg);
 
-    for (int i = 0; i < 10; i++)
+    auto productKey = productKeyGenerator.generateKey();
+
+    if (productKey.has_value())
     {
-        // Generate a product key
-        auto key = productKeyGenerator.generateKey();
+        std::cout << "Product Key: " << productKey.value() << std::endl;
 
-        // Check if the key was generated successfully and output the result
-        if (key.has_value())
-        {
+        std::shared_ptr<PKF::VigenereCipher> encryption = std::make_shared<PKF::VigenereCipher>();
 
-            std::cout << "Generated key: " << key.value() << std::endl;
-            std::cout << "Checksum is valid: " << checksumAlg->validate(key.value(), keyFormat->getSeparator()) << std::endl << std::endl;
-        }
-        else
+        std::string key = "zalupa";
+        auto encryptProductKey = encryption->encrypt(productKey.value(), key);
+
+        if (encryptProductKey.has_value())
         {
-            std::cerr << "Failed to generate key." << std::endl;
+            std::cout << "Encrypt Product Key: " << encryptProductKey.value() << std::endl;
+            std::cout << "Decrypt Product Key: " << encryption->decrypt(encryptProductKey.value(), key).value() << std::endl;
         }
     }
 

@@ -22,6 +22,7 @@ namespace PKF
 {
     class KeyFormat;
     class IRandomGenerator;
+    class IChecksumAlgorithm;
 
     class ProductKeyGenerator
     {
