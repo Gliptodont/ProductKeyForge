@@ -18,3 +18,4 @@
 #include "Encryption/IEncryptionAlgorithm.h"
 #include "Encryption/VigenereCipher.h"
 #include "Encryption/XOREncryption.h"
+#include "Encryption/ShiftCipher.h"

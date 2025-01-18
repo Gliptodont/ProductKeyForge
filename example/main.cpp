@@ -26,7 +26,7 @@ int main()
     {
         std::cout << "Product Key: " << productKey.value() << std::endl;
 
-        std::shared_ptr<PKF::VigenereCipher> encryption = std::make_shared<PKF::VigenereCipher>();
+        std::shared_ptr<PKF::ShiftCipher> encryption = std::make_shared<PKF::ShiftCipher>();
 
         std::string key = "zalupa";
         auto encryptProductKey = encryption->encrypt(productKey.value(), key);
@@ -39,6 +39,20 @@ int main()
     }
 
     std::cout << "------------------------------------------" << std::endl;
+
+    std::vector<std::string> data = {"HELLO", "chlen", "hui"};
+    auto dataProductKey = productKeyGenerator.generateKey(data, "KEY", true);
+
+    if (dataProductKey.has_value())
+    {
+        std::cout << "Product Key: " << dataProductKey.value() << std::endl;
+
+        std::shared_ptr<PKF::ShiftCipher> encryption = std::make_shared<PKF::ShiftCipher>();
+
+        std::string key = "KEY";
+
+        std::cout << "Decrypt Product Key: " << encryption->decrypt(dataProductKey.value(), key).value() << std::endl;
+    }
 
     return 0;
 }

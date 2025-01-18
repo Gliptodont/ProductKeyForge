@@ -45,6 +45,7 @@ set(HEADER_FILES
         include/Encryption/IEncryptionAlgorithm.h
         include/Encryption/XOREncryption.h
         include/Encryption/VigenereCipher.h
+        include/Encryption/ShiftCipher.h
 )
 
 # Set the source files
@@ -64,6 +65,7 @@ set(SOURCE_FILES
         # Encryption Algorithm
         src/Encryption/XOREncryption.cpp
         src/Encryption/VigenereCipher.cpp
+        src/Encryption/ShiftCipher.cpp
 )
 
 # Add the library

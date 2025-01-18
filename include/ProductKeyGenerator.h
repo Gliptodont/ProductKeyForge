@@ -3,26 +3,29 @@
 #include <iostream>
 #include <memory>
 #include <mutex>
+#include <optional>
+#include <ranges>
 #include <string>
 #include <string_view>
 #include <vector>
-#include <optional>
-#include <ranges>
-#include <atomic>
 
 #include "KeyFormat.h"
 
 #include "RandomGenerator/IRandomGenerator.h"
 #include "RandomGenerator/MTRandomGenerator.h"
 
-#include "Checksum/IChecksumAlgorithm.h"
 #include "Checksum/BaseChecksumAlgorithm.h"
+#include "Checksum/IChecksumAlgorithm.h"
+
+#include "Encryption/IEncryptionAlgorithm.h"
+#include "Encryption/ShiftCipher.h"
 
 namespace PKF
 {
     class KeyFormat;
     class IRandomGenerator;
     class IChecksumAlgorithm;
+    class IEncryptionAlgorithm;
 
     class ProductKeyGenerator
     {
@@ -33,6 +36,7 @@ namespace PKF
             : m_keyFormat(keyFormat)
             , m_randomGenerator(randomGenerator)
             , m_checksumAlgorithm(nullptr)
+            , m_encryptionAlgorithm(nullptr)
         {
             if (m_keyFormat == nullptr)
             {
@@ -49,8 +53,9 @@ namespace PKF
         }
 
         [[nodiscard]] std::optional<std::string> generateKey() const;
+        [[nodiscard]] std::optional<std::string> generateKey(
+            const std::vector<std::string>& data, const std::string& encryptionKey, bool isTotalNumberOfSegments = false) const;
         [[nodiscard]] std::vector<std::string> getKeyBySegments(std::string_view key) const;
-
 
         [[nodiscard]] std::shared_ptr<KeyFormat> getKeyFormat() const;
         bool setKeyFormat(const std::shared_ptr<KeyFormat>& newKeyFormat);
@@ -58,13 +63,17 @@ namespace PKF
         bool setRandomGenerator(const std::shared_ptr<IRandomGenerator>& newRandomGenerator);
         [[nodiscard]] std::shared_ptr<IChecksumAlgorithm> getChecksumAlgorithm() const;
         bool setChecksumAlgorithm(const std::shared_ptr<IChecksumAlgorithm>& newChecksumAlgorithm);
+        [[nodiscard]] std::shared_ptr<IEncryptionAlgorithm> getEncryptionAlgorithm() const;
+        bool setEncryptionAlgorithm(const std::shared_ptr<IEncryptionAlgorithm>& newEncryptionAlgorithm);
 
     private:
         mutable std::mutex m_mutex;
         std::shared_ptr<KeyFormat> m_keyFormat;
         std::shared_ptr<IRandomGenerator> m_randomGenerator;
         mutable std::shared_ptr<IChecksumAlgorithm> m_checksumAlgorithm;
+        mutable std::shared_ptr<IEncryptionAlgorithm> m_encryptionAlgorithm;
 
         [[nodiscard]] std::optional<std::string> generateSegment(size_t length) const;
+        void generateChecksum(std::string& key) const;
     };
 } // namespace PKF
