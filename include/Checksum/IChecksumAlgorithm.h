@@ -11,8 +11,8 @@ namespace PKF
     public:
         virtual ~IChecksumAlgorithm() = default;
 
-        virtual int calculate(const std::string&, char) const = 0;
-        virtual bool validate(const std::string&, char) const = 0;
+        [[nodiscard]] virtual int calculate(const std::string& key, char separator) const = 0;
+        [[nodiscard]] virtual bool validate(const std::string& key, char separator) const = 0;
 
         [[nodiscard]] bool validate(const std::string& key, int checksum, char separator) const
         {

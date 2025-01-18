@@ -5,11 +5,17 @@
 
 // Random Generator
 #include "RandomGenerator/IRandomGenerator.h"
-#include "RandomGenerator/MTRandomGenerator.h"
 #include "RandomGenerator/LinearCongruentialGenerator.h"
+#include "RandomGenerator/MTRandomGenerator.h"
 #include "RandomGenerator/XorshiftGenerator.h"
 
 // Checksum Algorithm
-#include "Checksum/IChecksumAlgorithm.h"
 #include "Checksum/BaseChecksumAlgorithm.h"
 #include "Checksum/CRC32ChecksumAlgorithm.h"
+#include "Checksum/IChecksumAlgorithm.h"
+
+// Encryption Algorithm
+#include "Encryption/IEncryptionAlgorithm.h"
+#include "Encryption/VigenereCipher.h"
+#include "Encryption/XOREncryption.h"
+#include "Encryption/ShiftCipher.h"

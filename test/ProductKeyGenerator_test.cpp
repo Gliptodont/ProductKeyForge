@@ -34,6 +34,17 @@ TEST_F(ProductKeyGeneratorTest, GenerateKey) {
     EXPECT_EQ(key->length(), 4 * 5 + 3 + 1 + 9); // 4 segments of 5 chars, 3 separators, 1 separator for checksum, 9 digits checksum
 }
 
+
+TEST_F(ProductKeyGeneratorTest, GenerateKeyWithDataAndEncryption)
+{
+    std::vector<std::string> data = {"data1", "data2", "data3"};
+    std::string encryptionKey = "encryptionKey";
+
+    auto key = productKeyGenerator->generateKey(data, encryptionKey, true);
+    ASSERT_TRUE(key.has_value());
+    ASSERT_FALSE(key->empty());
+}
+
 TEST_F(ProductKeyGeneratorTest, ValidateKey) {
     auto key = productKeyGenerator->generateKey();
     ASSERT_TRUE(key.has_value());

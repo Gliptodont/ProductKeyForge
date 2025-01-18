@@ -40,6 +40,12 @@ set(HEADER_FILES
         include/Checksum/IChecksumAlgorithm.h
         include/Checksum/BaseChecksumAlgorithm.h
         include/Checksum/CRC32ChecksumAlgorithm.h
+
+        # Encryption Algorithm
+        include/Encryption/IEncryptionAlgorithm.h
+        include/Encryption/XOREncryption.h
+        include/Encryption/VigenereCipher.h
+        include/Encryption/ShiftCipher.h
 )
 
 # Set the source files
@@ -55,6 +61,11 @@ set(SOURCE_FILES
         # Checksum Algorithm
         src/Checksum/BaseChecksumAlgorithm.cpp
         src/Checksum/CRC32ChecksumAlgorithm.cpp
+
+        # Encryption Algorithm
+        src/Encryption/XOREncryption.cpp
+        src/Encryption/VigenereCipher.cpp
+        src/Encryption/ShiftCipher.cpp
 )
 
 # Add the library

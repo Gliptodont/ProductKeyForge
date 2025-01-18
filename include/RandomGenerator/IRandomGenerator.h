@@ -12,6 +12,6 @@ namespace PKF
 
         virtual void init() = 0;
 
-        virtual std::optional<char> getRandomCharacter(const std::string&) = 0;
+        virtual std::optional<char> getRandomCharacter(const std::string& characters) = 0;
     };
 } // namespace PKF
