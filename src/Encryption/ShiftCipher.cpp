@@ -16,13 +16,13 @@ namespace PKF
             return std::nullopt;
         }
 
-        int shift = std::accumulate(key.begin(), key.end(), 0) % charsetSize;
+        size_t shift = static_cast<size_t>(std::accumulate(key.begin(), key.end(), 0)) % charsetSize;
 
         std::string result = data;
 
         for (char& ch : result)
         {
-            ch = shiftChar(ch, shift);
+            ch = shiftChar(ch, static_cast<int>(shift));
         }
 
         return result;
@@ -42,13 +42,13 @@ namespace PKF
             return std::nullopt;
         }
 
-        int shift = std::accumulate(key.begin(), key.end(), 0) % charsetSize;
+        size_t shift = static_cast<size_t>(std::accumulate(key.begin(), key.end(), 0)) % charsetSize;
 
         std::string result = encryptedData;
 
         for (char& ch : result)
         {
-            ch = shiftChar(ch, -shift);
+            ch = shiftChar(ch, -static_cast<int>(shift));
         }
 
         return result;
@@ -72,8 +72,8 @@ namespace PKF
             return ch;
         }
 
-        size_t index = static_cast<size_t>(pos - std::begin(charset));
-        size_t newIndex = (index + shift + charsetSize) % charsetSize;
+        size_t index = static_cast<size_t>(pos - &charset[0]);
+        size_t newIndex = (index + static_cast<size_t>(shift) + charsetSize) % charsetSize;
 
         return charset[newIndex];
     }
