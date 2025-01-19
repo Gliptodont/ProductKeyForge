@@ -22,22 +22,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up CMake
-        uses: cmake/gha-setup-cmake@v3
-        with:
-          cmake-version: '3.22'
+      - name: Install CMake
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y cmake
 
-      - name: Set up Ninja (if selected as generator)
-        if: matrix.generator == 'Ninja'
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+      - name: Install CMake (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install cmake
+
+      - name: Install CMake (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
 
       - name: Install dependencies (Linux and macOS)
         if: matrix.os != 'windows-latest'
         run: |
           sudo apt-get update || brew update
-          sudo apt-get install ninja-build -y || brew install ninja
+          sudo apt-get install -y ninja-build || brew install ninja
 
       - name: Configure the project
         run: |
@@ -50,8 +52,10 @@ jobs:
         run: cmake --build build --config Release
 
       - name: Run tests
-        if: matrix.os != 'windows-latest' # Windows test runner logic here
-        run: ctest --test-dir build --output-on-failure
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd build
+          ctest --output-on-failure
 
       - name: Run tests on Windows
         if: matrix.os == 'windows-latest'
