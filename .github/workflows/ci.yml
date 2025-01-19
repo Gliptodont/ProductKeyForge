@@ -48,17 +48,18 @@ jobs:
           fi
 
       - name: Configure build
+        shell: bash
         run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" && "${{ matrix.arch }}" == "arm64" ]]; then
-            cmake -S . -B build -G "${{ matrix.generator }}" \
-              -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
-              -DTEST_PRODUCT_KEY_FORGE=ON \
-              -DCMAKE_OSX_ARCHITECTURES=arm64
-          else
-            cmake -S . -B build -G "${{ matrix.generator }}" \
-              -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
-              -DTEST_PRODUCT_KEY_FORGE=ON
-          fi
+            if [[ "${{ matrix.os }}" == "macos-latest" && "${{ matrix.arch }}" == "arm64" ]]; then
+              cmake -S . -B build -G "${{ matrix.generator }}" \
+                -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+                -DTEST_PRODUCT_KEY_FORGE=ON \
+                -DCMAKE_OSX_ARCHITECTURES=arm64
+            else
+              cmake -S . -B build -G "${{ matrix.generator }}" \
+                -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+                -DTEST_PRODUCT_KEY_FORGE=ON
+            fi
 
       - name: Build
         run: cmake --build build --config Release
