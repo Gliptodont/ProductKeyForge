@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        generator: [Ninja, "Unix Makefiles"]
         include:
           - os: windows-latest
             generator: Ninja
@@ -38,7 +37,7 @@ jobs:
         with:
           cmake-version: '3.22'
 
-      - name: Install dependencies (Linux/macOS)
+      - name: Install dependencies
         if: runner.os != 'Windows'
         run: |
           if [[ "$RUNNER_OS" == "Linux" ]]; then
