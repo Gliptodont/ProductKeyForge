@@ -56,9 +56,18 @@ namespace PKF
 
     char ShiftCipher::shiftChar(char ch, int shift) const
     {
-        const char* pos = std::find(std::begin(charset), std::end(charset) - 1, ch);
+        const char* pos = nullptr;
 
-        if (pos == std::end(charset) - 1)
+        for (const char* it = charset; it < charset + charsetSize; ++it)
+        {
+            if (*it == ch)
+            {
+                pos = it;
+                break;
+            }
+        }
+
+        if (pos == nullptr)
         {
             return ch;
         }
