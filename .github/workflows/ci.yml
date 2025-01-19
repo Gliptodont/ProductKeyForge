@@ -40,7 +40,13 @@ jobs:
 
       - name: Install dependencies (Linux/macOS)
         if: runner.os != 'Windows'
-        run: sudo apt-get install -y build-essential || brew install cmake
+        run: |
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update
+            sudo apt-get install -y build-essential cmake
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            brew install cmake
+          fi
 
       - name: Configure build
         run: |
