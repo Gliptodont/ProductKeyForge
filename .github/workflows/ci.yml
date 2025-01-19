@@ -19,9 +19,13 @@ jobs:
         generator: [Ninja, "Unix Makefiles"]
 
     steps:
+      # Шаг для клонирования кода
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive # Указываем, чтобы подтягивать субмодули
 
+      # Установка CMake (замените команды установки на ваш случай)
       - name: Install CMake
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get update && sudo apt-get install -y cmake
@@ -35,12 +39,14 @@ jobs:
         run: |
           choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
 
+      # Установка зависимостей (Linux и macOS)
       - name: Install dependencies (Linux and macOS)
         if: matrix.os != 'windows-latest'
         run: |
           sudo apt-get update || brew update
           sudo apt-get install -y ninja-build || brew install ninja
 
+      # Конфигурация проекта
       - name: Configure the project
         run: |
           cmake -S . -B build \
@@ -48,9 +54,11 @@ jobs:
                 -DCMAKE_BUILD_TYPE=Release \
                 -DTEST_PRODUCT_KEY_FORGE=ON
 
+      # Сборка проекта
       - name: Build the project
         run: cmake --build build --config Release
 
+      # Запуск тестов
       - name: Run tests
         if: matrix.os != 'windows-latest'
         run: |
@@ -63,11 +71,13 @@ jobs:
           cd build
           ctest --output-on-failure
 
+      # Упаковка артефактов сборки
       - name: Package the build artifacts
         if: success()
         run: |
           cmake --install build --prefix install
 
+      # Загрузка артефактов
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
