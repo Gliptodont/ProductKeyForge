@@ -1,4 +1,4 @@
-name: CI
+name: CI Build and Test
 
 on:
   push:
@@ -9,77 +9,57 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build and Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-
+  build-and-test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
         generator: [Ninja, "Unix Makefiles"]
+        include:
+          - os: windows-latest
+            generator: Ninja
+            compiler: cl
+          - os: ubuntu-latest
+            generator: "Unix Makefiles"
+            compiler: gcc
+          - os: macos-latest
+            generator: "Unix Makefiles"
+            compiler: clang
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      # Шаг для клонирования кода
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          submodules: recursive # Указываем, чтобы подтягивать субмодули
+          submodules: recursive
 
-      # Установка CMake (замените команды установки на ваш случай)
-      - name: Install CMake
-        if: matrix.os == 'ubuntu-latest'
-        run: sudo apt-get update && sudo apt-get install -y cmake
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1
+        with:
+          cmake-version: '3.22'
 
-      - name: Install CMake (macOS)
-        if: matrix.os == 'macos-latest'
-        run: brew install cmake
+      - name: Install dependencies (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: sudo apt-get install -y build-essential || brew install cmake
 
-      - name: Install CMake (Windows)
-        if: matrix.os == 'windows-latest'
+      - name: Configure build
         run: |
-          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+          cmake -S . -B build -G "${{ matrix.generator }}" \
+            -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+            -DTEST_PRODUCT_KEY_FORGE=ON
 
-      # Установка зависимостей (Linux и macOS)
-      - name: Install dependencies (Linux and macOS)
-        if: matrix.os != 'windows-latest'
-        run: |
-          sudo apt-get update || brew update
-          sudo apt-get install -y ninja-build || brew install ninja
-
-      # Конфигурация проекта
-      - name: Configure the project
-        run: |
-          cmake -S . -B build \
-                -G "${{ matrix.generator }}" \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DTEST_PRODUCT_KEY_FORGE=ON
-
-      # Сборка проекта
-      - name: Build the project
+      - name: Build
         run: cmake --build build --config Release
 
-      # Запуск тестов
       - name: Run tests
-        if: matrix.os != 'windows-latest'
-        run: |
-          cd build
-          ctest --output-on-failure
+        run: ctest --test-dir build --output-on-failure
 
-      - name: Run tests on Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          cd build
-          ctest --output-on-failure
+      - name: Package
+        run: cmake --build build --config Release --target package
 
-      # Упаковка артефактов сборки
-      - name: Package the build artifacts
-        if: success()
-        run: |
-          cmake --install build --prefix install
-
-      # Загрузка артефактов
-      - name: Upload build artifacts
+      - name: Upload artifacts
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}-build-artifacts
-          path: install
+          name: ProductKeyForge-${{ matrix.os }}
+          path: build/*.{zip,tgz}
