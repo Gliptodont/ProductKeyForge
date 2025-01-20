@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 # Set the project
 set(PROJECT_NAME "ProductKeyForge")
 project(${PROJECT_NAME}
-        VERSION 0.0.1
+        VERSION 1.0.0
         DESCRIPTION "ProductKeyForge is a lightweight, cross-platform C++20 library designed to generate, validate, and even encrypt custom product keys."
         HOMEPAGE_URL "https://github.com/Gliptodont/ProductKeyForge"
         LANGUAGES CXX
