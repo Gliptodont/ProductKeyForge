@@ -71,5 +71,5 @@ jobs:
     - name: Upload package artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: packaged-artifacts
+        name: my-artifact-${{ github.run_number }}-${{ github.job }}
         path: ${{ steps.strings.outputs.build-output-dir }}/*.zip
