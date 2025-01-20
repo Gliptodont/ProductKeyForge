@@ -50,6 +50,7 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo "install-dir=${{ github.workspace }}/install" >> "$GITHUB_OUTPUT"
 
     - name: Configure CMake
       run: >
@@ -57,17 +58,27 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_INSTALL_PREFIX=${{ steps.strings.outputs.install-dir }}
+        -DTEST_PRODUCT_KEY_FORGE=ON
+        -DBUILD_PRODUCT_KEY_FORGE_EXAMPLE=ON
         -S ${{ github.workspace }}
 
     - name: Build
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    - name: Run Google Test
+      run: >
+        ctest --test-dir ${{ steps.strings.outputs.build-output-dir }} --output-on-failure
+
+    - name: Install
+      run: cmake --install ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
     - name: Package with CPack
       run: >
         cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target package
 
     - name: Upload package artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: packaged-artifacts
         path: ${{ steps.strings.outputs.build-output-dir }}/*.zip
