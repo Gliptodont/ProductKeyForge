@@ -62,11 +62,20 @@ jobs:
         -S ${{ github.workspace }}
 
     - name: Build
-      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: |
+        if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+          cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+        else
+          cmake --build ${{ steps.strings.outputs.build-output-dir }}
+        fi
 
     - name: Package with CPack
-      run: >
-        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target package
+      run: |
+        if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+          cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target package
+        else
+          cmake --build ${{ steps.strings.outputs.build-output-dir }} --target package
+        fi
 
     - name: Upload package artifacts
       uses: actions/upload-artifact@v4
