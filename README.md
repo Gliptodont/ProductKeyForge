@@ -49,7 +49,7 @@ To include the library in your project using `git clone`:
 2. Add the library to your `CMakeLists.txt`:
 
     ```` cmake
-   add_subdirectory(ProductKeyForge)
+   add_subdirectory(ProductKeyForge EXCLUDE_FROM_ALL)
    target_link_libraries(YourProject PRIVATE ProductKeyForge)
    ````
 
@@ -67,7 +67,7 @@ To include the library as a submodule:
 2. Add the library to your `CMakeLists.txt`:
 
     ```` cmake
-   add_subdirectory(external/ProductKeyForge)
+   add_subdirectory(external/ProductKeyForge EXCLUDE_FROM_ALL)
    target_link_libraries(YourProject PRIVATE ProductKeyForge)
    ````
    
