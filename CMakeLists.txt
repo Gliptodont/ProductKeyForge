@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 # Set the project
 set(PROJECT_NAME "ProductKeyForge")
 project(${PROJECT_NAME}
-        VERSION 0.0.1
+        VERSION 1.0.0
         DESCRIPTION "ProductKeyForge is a lightweight, cross-platform C++20 library designed to generate, validate, and even encrypt custom product keys."
         HOMEPAGE_URL "https://github.com/Gliptodont/ProductKeyForge"
         LANGUAGES CXX
@@ -85,6 +85,17 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror)
 endif()
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(COMPILER_NAME "gcc")
+    set(COMPILER_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set(COMPILER_NAME "msvc")
+    set(COMPILER_VERSION "${MSVC_VERSION}")
+else()
+    set(COMPILER_NAME "clang")
+    set(COMPILER_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
+endif()
+
 # Installation
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}Targets
@@ -124,8 +135,8 @@ install(FILES
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_DESCRIPTION}")
-set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}")
-set(CPACK_GENERATOR "ZIP;TGZ")
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}-${COMPILER_NAME}")
+set(CPACK_GENERATOR "ZIP")
 
 # Include CPack to enable the configuration
 include(CPack)
